@@ -1,65 +1,54 @@
+import java.util.LinkedList;
+
 /**
- * MAIN CLASS - UseCase13PalindromeCheckerApp
- *
- * Use Case 13: Performance Comparison
+ * Use Case 8: Linked List Based Palindrome Checker
  *
  * Description:
- * This class measures and compares the execution
- * performance of palindrome validation algorithms.
- *
- * At this stage, the application:
- * - Uses a palindrome strategy implementation
- * - Captures execution start and end time
- * - Calculates total execution duration
- * - Displays benchmarking results
- *
- * This use case focuses purely on performance
- * measurement and algorithm comparison.
- *
- * The goal is to introduce benchmarking concepts.
+ * This class checks whether a string is a palindrome
+ * using a LinkedList[cite: 91].
+ * Characters are added to the list and then compared
+ * by removing elements from both ends:
+ * - removeFirst()
+ * - removeLast() [cite: 92]
+ * This demonstrates how LinkedList supports
+ * double-ended operations for symmetric validation[cite: 92].
  *
  * @author Developer
- * @version 13.0
+ * @version 8.0 [cite: 93]
  */
 public class PalindromeApp {
 
     /**
-     * Application entry point for UC13.
-     *
-     * @param args Command-line arguments
+     * Application entry point for UC8[cite: 93].
+     * @param args Command-line arguments [cite: 93]
      */
-    public static void main(String[] args) { //
+    public static void main(String[] args) {
 
-        // Define the input string
-        String input = "Level"; //
-        String normalizedInput = input.toLowerCase();
+        // Define the input string [cite: 94]
+        String input = "level"; // [cite: 94]
 
-        // Capture execution start time
-        long startTime = System.nanoTime(); //
+        // Create a LinkedList to store characters [cite: 95]
+        LinkedList<Character> list = new LinkedList<>(); // [cite: 95]
 
-        // Strategy Implementation: Standard Two-Pointer approach
-        boolean isPalindrome = true;
-        int start = 0;
-        int end = normalizedInput.length() - 1;
-
-        while (start < end) {
-            if (normalizedInput.charAt(start) != normalizedInput.charAt(end)) {
-                isPalindrome = false;
-                break;
-            }
-            start++;
-            end--;
+        // Add each character to the linked list [cite: 96]
+        for (char c : input.toCharArray()) { // [cite: 96]
+            list.add(c);
         }
 
-        // Capture execution end time
-        long endTime = System.nanoTime(); //
+        // Flag to track palindrome state [cite: 96]
+        boolean isPalindrome = true; // [cite: 96]
 
-        // Calculate total execution duration
-        long duration = endTime - startTime; //
+        // Compare until only one or zero elements remain
+        while (list.size() > 1) { //
+            // Removing elements from both ends to compare [cite: 92]
+            if (list.removeFirst() != list.removeLast()) {
+                isPalindrome = false;
+                break; // Exit early if a mismatch occurs
+            }
+        }
 
-        // Display benchmarking results
+        // Display results
         System.out.println("Input: " + input); //
         System.out.println("Is Palindrome?: " + isPalindrome); //
-        System.out.println("Execution Time: " + duration + " ns"); //
     }
 }
